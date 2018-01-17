@@ -92,6 +92,11 @@ class MonFilter(BaseFilter):
             event_attribute='gender', eval_func=operator.contains,
             limit=BaseFilter.parse_as_set(
                 MonUtils.get_gender_sym, 'genders', data))
+        # Type
+        self.types = self.evaluate_attribute(  # f.types contains m.types
+            event_attribute='type', eval_func=operator.contains,
+            limit=BaseFilter.parse_as_set(
+                MonUtils.get_type_sym, 'types', data))
         # Height
         self.min_height = self.evaluate_attribute(  # f.min_height <= m.height
             event_attribute='height', eval_func=operator.le,
@@ -180,6 +185,9 @@ class MonFilter(BaseFilter):
         # Cosmetic
         if self.genders is not None:
             settings['genders'] = self.genders
+        #Types
+        if self.types is not None:
+            settings['types'] = self.types
         # Height
         if self.min_height is not None:
             settings['min_height'] = self.min_height
